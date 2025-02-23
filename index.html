@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MATCH</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      
+    }
+    .message {
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .button-container {
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+    }
+    #yesButton {
+      background-color: #4CAF50;
+      color: white;
+    }
+    #noButton {
+      background-color: #f44336;
+      color: white;
+      position: relative;
+    }
+    #winMessage {
+      font-size: 32px;
+      color: #4CAF50;
+      margin-top: 20px;
+      display: none; /* Hidden by default */
+    }
+    #dontClickMessage {
+      font-size: 24px;
+      color: #f44336;
+      margin-top: 20px;
+      display: none; /* Hidden by default */
+    }
+  </style>
+</head>
+<body >
+      <div class="message">PAK VS IND KON JEETEGA </div>
+  <div class="button-container">
+    <button id="yesButton">Yes</button>
+    <button id="noButton">No</button>
+  </div>
+  <div id="winMessage">Yes we will win</div>
+  <div id="dontClickMessage">😂</div>
+
+  <script>
+    const noButton = document.getElementById('noButton');
+    const yesButton = document.getElementById('yesButton');
+    const winMessage = document.getElementById('winMessage');
+    const dontClickMessage = document.getElementById('dontClickMessage');
+
+    // Function to move the "No" button randomly
+    function moveButton() {
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+      const buttonWidth = noButton.offsetWidth;
+      const buttonHeight = noButton.offsetHeight;
+
+      // Calculate random position within the screen boundaries
+      const randomX = Math.floor(Math.random() * (windowWidth - buttonWidth));
+      const randomY = Math.floor(Math.random() * (windowHeight - buttonHeight));
+
+      // Apply the new position
+      noButton.style.position = 'absolute';
+      noButton.style.left = `${randomX}px`;
+      noButton.style.top = `${randomY}px`;
+
+      // Show "Don't click" message
+      dontClickMessage.style.display = 'block';
+      setTimeout(() => {
+        dontClickMessage.style.display = 'none'; // Hide the message after 1 second
+      }, 1000);
+    }
+
+    // Event listener for "Yes" button
+    yesButton.addEventListener('click', () => {
+      winMessage.style.display = 'block'; // Show the win message
+    });
+
+    // Event listeners for "No" button
+    noButton.addEventListener('mouseover', moveButton); // For desktop
+    noButton.addEventListener('touchstart', (e) => {
+      e.preventDefault(); // Prevent default touch behavior
+      moveButton(); // Move the button on touch
+    });
+  </script>
+</body>
+</html>
